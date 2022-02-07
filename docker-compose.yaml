@@ -1,0 +1,31 @@
+version: '3'
+services:
+  server:
+    container_name: quizz_dev_api
+    image: node:12.18.4
+    working_dir: /code
+    ports:
+      - 8080:8080
+    environment:
+      - DB_NAME=playersdb
+      - DB_CONNECTION=mongodb://players:playerspass@db27017
+    depends_on:
+      - db
+    volumes:
+    - type: bind
+      source: /
+      target: /code
+    command: bash -c "npm install && npm start"
+  
+  db:
+    container_name: quizz_dev_db
+    image: mongo:lastest
+    volumes:
+      - "dbdata:/var/lib/mongodb/data"
+      - "./db/seed.js:/docker-entrypoint-initdb.d/seed.js:ro"
+    environment:
+    - MONGO_INITDB_ROOT_USERNAME=players
+    - MONGO_INITDB_DATABASE=playersdb
+    - MONGO_INITDB_ROOT_PASS=playerspass
+volumes:
+  dbdata:
