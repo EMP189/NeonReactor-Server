@@ -1,6 +1,4 @@
 node_modules
-<<<<<<< HEAD
 package-lock.json
-=======
-package-lock.json
->>>>>>> 1e6caeee21c673403ec1f1510dad1b80d880c7cf
+*/node_modules
+api/package-lock.json
