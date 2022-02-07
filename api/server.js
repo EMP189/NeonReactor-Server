@@ -13,7 +13,7 @@ server.use(express.json());
 
 const playerRoutes = require('./controllers/players');
 
-server.use('/players, playerRoutes');
+server.use('/players', playerRoutes);
 
 server.get('/', (req, res) => res.json({ message: 'Welcome to the Quiz'}));
 

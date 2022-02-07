@@ -19,7 +19,7 @@ services:
   
   db:
     container_name: quizz_dev_db
-    image: mongo:lastest
+    image: mongo:latest
     volumes:
       - "dbdata:/var/lib/mongodb/data"
       - "./db/seed.js:/docker-entrypoint-initdb.d/seed.js:ro"
