@@ -1,5 +1,24 @@
 {
   "dependencies": {
     "express": "^4.17.2"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "neonreactor-server",
+  "description": "- N-Quiz is an online game quiz where you can play with your friends to check who is the ultimate quizzer!",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EMP189/NeonReactor-Server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EMP189/NeonReactor-Server/issues"
+  },
+  "homepage": "https://github.com/EMP189/NeonReactor-Server#readme"
 }
