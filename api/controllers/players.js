@@ -3,6 +3,8 @@ const router = express.Router();
 
 const Player = require('../models/players');
 
+
+// Top 10 players for leasderboard 
 router.get('/', async (req,res) => {
     try {
         const players = await Player.all
@@ -14,9 +16,11 @@ router.get('/', async (req,res) => {
     }
 })
 
+// adding a player only (not adding score)
+
 router.post('/', async (req,res) => {
     try {
-        const players = await Player.create(req.body.username )
+        const players = await Player.create(req.body.username)
         res.status(201).send(players)
     }
     catch (err) {
@@ -24,7 +28,7 @@ router.post('/', async (req,res) => {
     }
 })
 
-
+// find a player 
 router.get('/:username', async (req,res) => {
     try {
         const players = await Player.findByUsername(req.body.username)
@@ -36,10 +40,11 @@ router.get('/:username', async (req,res) => {
     }
 })
 
+// update of players score 
 router.patch('/:username', async (req,res) => {
     try {
 
-        const players = await Player.update(req.body.username)
+        const players = await Player.update(req.body.username, req.body.score)
         res.status(204).send()
     }
     catch (err) {
