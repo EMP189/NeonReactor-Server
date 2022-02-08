@@ -12,7 +12,7 @@ module.exports = class Player {
         return new Promise (async (resolve, reject) => {
             try {
                 const db = await init()
-                const playersData = await db.collection('players').find().limit(10).toArray()
+                const playersData = await db.collection('players').find().sort({score:-1}).limit(10).toArray()
                 const players = playersData.map(p => new Player({...p, id: p._id}))
                 resolve(players);
             }
