@@ -1,12 +1,11 @@
 const {init} = require ('../db_Config')
-const { ObjectId } = require('mongodb')
 
 module.exports = class Player {
 
     constructor(data){
-        this.id = data.id
-        this.username = data.username
-        this.score = data.score
+        this.id = data.id;
+        this.username = data.username;
+        this.score = data.score;
     }
     // Top 10 players for leaderboard 
     static get all() {
