@@ -33,8 +33,7 @@ router.post('/', async (req,res) => {
 router.get('/:username', async (req,res) => {
     try {
         const players = await Player.findByUsername(req.params.username)
-        res.json(players)
-        res.status(200).send()
+        res.status(200).send(players)
       }
     catch (err) {
         res.status(500).send({ err })
@@ -44,14 +43,12 @@ router.get('/:username', async (req,res) => {
 // update of players score 
 router.patch('/:username', async (req,res) => {
     try {
-
         const players = await Player.update(req.params.username, req.body.score)
         res.status(204).send()
     }
     catch (err) {
         res.status(500).send({ err })
     }
-
 })
 
 module.exports = router
