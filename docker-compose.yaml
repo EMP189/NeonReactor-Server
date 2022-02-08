@@ -5,7 +5,7 @@ services:
     image: node:12.18.4
     working_dir: /code
     ports:
-      - 3000:3000
+      - 8080:8080
     environment:
       - DB_NAME=playersdb
       - DB_CONNECTION=mongodb://admin:adminpass@db:27017
