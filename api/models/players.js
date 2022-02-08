@@ -1,5 +1,4 @@
 const {init} = require ('../db_Config')
-const { ObjectId } = require('mongodb')
 
 module.exports = class Player {
 
@@ -12,16 +11,9 @@ module.exports = class Player {
     static get all() {
         return new Promise (async (resolve, reject) => {
             try {
-<<<<<<< HEAD
-                const db = await init();
-                const playersData = await db.collection('players').find().limit(10).toArray();
-                const players = playersData.map(p => new Player({...p, id: p._id}));
-                console.log(playersData);
-=======
                 const db = await init()
                 const playersData = await db.collection('players').find().limit(10).toArray()
                 const players = playersData.map(p => new Player({...p, id: p._id}))
->>>>>>> 4c59f170cf0b37ef79a2b7cd33096ab0ecff3aec
                 resolve(players);
             }
             catch (err ) {
@@ -51,13 +43,8 @@ module.exports = class Player {
         return new Promise (async (resolve, reject ) => {
             try {
                 const db = await init();
-<<<<<<< HEAD
-                let player = await db.collection('players').findOne({username: username}).toArray(); 
-                let newPlayer = new Player({...player[0], id: player[0]._id });
-=======
                 let player = await db.collection('players').findOne({username: username})
                 let newPlayer = new Player({...player })
->>>>>>> 4c59f170cf0b37ef79a2b7cd33096ab0ecff3aec
                 resolve (newPlayer);  
             }
             catch (err) {
