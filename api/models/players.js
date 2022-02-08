@@ -12,7 +12,7 @@ module.exports = class Player {
         return new Promise (async (resolve, reject) => {
             try {
                 const db = await init()
-                const playersData = await db.collection('players').find().limit(10).toArray()
+                const playersData = await db.collection('players').find().sort({score:-1}).limit(10).toArray()
                 const players = playersData.map(p => new Player({...p, id: p._id}))
                 resolve(players);
             }
@@ -55,16 +55,16 @@ module.exports = class Player {
 
     static update(username, score) {
         return new Promise (async (resolve, reject ) => {
-            try {
+           try {
                 const db = await init();
-                let player = await db.collection('players').findOneAndUpdate({username: username}, {score: score })
+                let player = await db.collection('players').findOneAndUpdate({username : username} ,{$inc: {score: score }}, {returnOriginal:false})
                 let updatedPlayer = new Player({...player})
                 console.log(player);
                 resolve (updatedPlayer);
-            }
-            catch (err) {
-                reject('Error updating player');
-            }
+           }
+           catch (err) {
+               reject(err);
+           }
         })
     }     
 

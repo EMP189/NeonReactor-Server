@@ -1,0 +1,22 @@
+GET http://localhost:3000/players
+
+###
+POST http://localhost:3000/players
+Content-Type: application/json 
+
+{
+        "username" : "Testplayer"
+}
+
+
+###
+PATCH http://localhost:3000/players/Testplayer
+Content-Type: application/json 
+
+{
+    
+        "score" : 30
+
+}
+
+

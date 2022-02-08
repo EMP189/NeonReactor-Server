@@ -11,7 +11,7 @@ router.get('/', async (req,res) => {
         res.status(200).send(players)
     }
     catch (err) {
-        res.status(500).send({ err })
+        res.status(404).send({ err })
     }
 })
 
@@ -19,11 +19,16 @@ router.get('/', async (req,res) => {
 
 router.post('/', async (req,res) => {
     try {
-        const players = await Player.create(req.body.username)
-        res.status(201).send(players)
+        let players = await Player.findByUsername(req.body.username)
+        if (!players ) {
+            players = await Player.create(req.body.username)
+            res.status(201).send(players)
+        } else {
+            res.status(409)
+        }
     }
     catch (err) {
-        res.status(500).send({ err })
+        res.status(409).send({ err })
     }
 })
 
@@ -34,7 +39,7 @@ router.get('/:username', async (req,res) => {
         res.status(200).send(players)
       }
     catch (err) {
-        res.status(500).send({ err })
+        res.status(404).send({ err })
     }
 })
 
@@ -42,11 +47,11 @@ router.get('/:username', async (req,res) => {
 router.patch('/:username', async (req,res) => {
     try {
         const players = await Player.update(req.params.username, req.body.score)
-        res.status(204).send()
+        res.status(204)
     }
-    catch (err) {
-        res.status(500).send({ err })
-    }
+   catch (err) {
+       res.status(409).send({ err })
+   }
 })
 
 module.exports = router
