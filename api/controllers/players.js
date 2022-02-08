@@ -32,7 +32,7 @@ router.post('/', async (req,res) => {
 // find a player 
 router.get('/:username', async (req,res) => {
     try {
-        const players = await Player.findByUsername(req.body.username)
+        const players = await Player.findByUsername(req.params.username)
         res.json(players)
         res.status(200).send()
       }
@@ -45,7 +45,7 @@ router.get('/:username', async (req,res) => {
 router.patch('/:username', async (req,res) => {
     try {
 
-        const players = await Player.update(req.body.username, req.body.score)
+        const players = await Player.update(req.params.username, req.body.score)
         res.status(204).send()
     }
     catch (err) {

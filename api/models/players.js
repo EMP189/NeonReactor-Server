@@ -13,7 +13,7 @@ module.exports = class Player {
         return new Promise (async (resolve, reject) => {
             try {
                 const db = await init();
-                const playersData = await db.collection('players').find().toArray().limit(10);
+                const playersData = await db.collection('players').find().limit(10).toArray();
                 const players = playersData.map(p => new Player({...p, id: p._id}));
                 console.log(playersData);
                 resolve(players);
@@ -49,8 +49,8 @@ module.exports = class Player {
         return new Promise (async (resolve, reject ) => {
             try {
                 const db = await init();
-                let player = await db.collection('players').findOne({username: username}) 
-                let newPlayer = new Player({...player })
+                let player = await db.collection('players').findOne({username: username}).toArray(); 
+                let newPlayer = new Player({...player[0], id: player[0]._id });
                 resolve (newPlayer);  
             }
             catch (err) {
