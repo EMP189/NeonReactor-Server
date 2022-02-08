@@ -5,10 +5,10 @@ services:
     image: node:12.18.4
     working_dir: /code
     ports:
-      - 8080:8080
+      - 3000:3000
     environment:
       - DB_NAME=playersdb
-      - DB_CONNECTION=mongodb://players:playerspass@db:27017
+      - DB_CONNECTION=mongodb://admin:adminpass@db:27017
     depends_on:
       - db
     volumes:
