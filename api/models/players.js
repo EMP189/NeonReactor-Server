@@ -27,11 +27,16 @@ module.exports = class Player {
         return new Promise (async (resolve, reject) => {
             try {
                 const db = await init();
-                let score = 0
-                let playerData = await db.collection('players').insertOne({ username, score } )
-                let id = playerData.insertedId
-                let newPlayer = new Player({id, username, score})
-                resolve (newPlayer);
+                let player = await db.collection('players').findOne({username: username})
+                if (player) {
+                    reject ('Error creating player');
+                } else {
+                    let score = 0
+                    let playerData = await db.collection('players').insertOne({ username, score } )
+                    let id = playerData.insertedId
+                    let newPlayer = new Player({id, username, score})
+                    resolve (newPlayer);
+                }
             } catch (err) {
                 reject ('Error creating player');
             }
@@ -44,8 +49,12 @@ module.exports = class Player {
             try {
                 const db = await init();
                 let player = await db.collection('players').findOne({username: username})
-                let newPlayer = new Player({...player })
-                resolve (newPlayer);  
+                if (player) {
+                    let newPlayer = new Player({...player })
+                    resolve (newPlayer);
+                } else {
+                    reject ( 'Player not found')
+                }
             }
             catch (err) {
                 reject ( 'Player not found')
