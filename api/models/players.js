@@ -57,8 +57,9 @@ module.exports = class Player {
         return new Promise (async (resolve, reject ) => {
             try {
                 const db = await init();
-                let player = await db.collection('players').findOneAndUpdate({username : username} , {score: score })
+                let player = await db.collection('players').findOneAndUpdate({username: username}, {score: score })
                 let updatedPlayer = new Player({...player})
+                console.log(player);
                 resolve (updatedPlayer);
             }
             catch (err) {
