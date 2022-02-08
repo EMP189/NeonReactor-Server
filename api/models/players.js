@@ -4,17 +4,18 @@ const { ObjectId } = require('mongodb')
 module.exports = class Player {
 
     constructor(data){
-        this.id = data.id
-        this.username = data.username
-        this.score = data.score
+        this.id = data.id;
+        this.username = data.username;
+        this.score = data.score;
     }
     // Top 10 players for leaderboard 
     static get all() {
         return new Promise (async (resolve, reject) => {
             try {
-                const db = await init()
-                const playersData = await db.collection('players').find().toArray().limit(10)
-                const players = playersData.map(p => new Player({...p, id: p._id}))
+                const db = await init();
+                const playersData = await db.collection('players').find().toArray().limit(10);
+                const players = playersData.map(p => new Player({...p, id: p._id}));
+                console.log(playersData);
                 resolve(players);
 
             }

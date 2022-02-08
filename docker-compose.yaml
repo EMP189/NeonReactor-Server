@@ -16,7 +16,6 @@ services:
       source: ./api
       target: /code
     command: bash -c "npm install && npm start"
-    
   db:
     container_name: quizz_dev_db
     image: mongo:latest

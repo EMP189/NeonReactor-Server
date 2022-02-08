@@ -8,6 +8,7 @@ const Player = require('../models/players');
 router.get('/', async (req,res) => {
     try {
         const players = await Player.all
+        console.log(players);
         res.json(players)
         res.status(200).send()
     }
