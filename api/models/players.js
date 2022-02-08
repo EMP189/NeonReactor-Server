@@ -1,7 +1,7 @@
 const {init} = require ('../db_Config')
 const { ObjectId } = require('mongodb')
 
-class Player {
+module.exports = class Player {
 
     constructor(data){
         this.id = data.id
