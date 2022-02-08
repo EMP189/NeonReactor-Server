@@ -16,7 +16,7 @@ io.on('connection', socket => {
   });
 
   socket.on('start-game', (room, quiz) => {
-    socket.to(room).emit('init-game', quiz);
+    socket.to(room).emit('init-game', quiz)
   });
 
   socket.on('end-game', (room, username, score) => {
