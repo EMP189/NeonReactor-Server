@@ -56,15 +56,15 @@ module.exports = class Player {
 
     static update(username, score) {
         return new Promise (async (resolve, reject ) => {
-            try {
+           try {
                 const db = await init();
-                let player = await db.collection('players').findOneAndUpdate({username : username} , {score: score })
+                let player = await db.collection('players').findOneAndUpdate({username : username} ,{$inc: {score: score }}, {returnOriginal:false})
                 let updatedPlayer = new Player({...player})
                 resolve (updatedPlayer);
-            }
-            catch (err) {
-                reject('Error updating player');
-            }
+           }
+           catch (err) {
+               reject(err);
+           }
         })
     }     
 
