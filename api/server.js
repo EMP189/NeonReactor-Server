@@ -3,9 +3,6 @@ const express = require('express');
 const server = express();
 server.use(express.json());
 
-server.get('/', (req,res) => res.send('Welcome'));
-
-
 const cors = require('cors');
 
 server.use(cors('*'));
