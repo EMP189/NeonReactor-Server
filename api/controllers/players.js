@@ -9,8 +9,7 @@ router.get('/', async (req,res) => {
     try {
         const players = await Player.all
         res.status(200).send(players)
-    }
-    catch (err) {
+    } catch (err) {
         res.status(404).send({ err })
     }
 })
@@ -19,13 +18,8 @@ router.get('/', async (req,res) => {
 
 router.post('/', async (req,res) => {
     try {
-        let players = await Player.findByUsername(req.body.username)
-        if (!players ) {
-            players = await Player.create(req.body.username)
-            res.status(201).send(players)
-        } else {
-            res.status(409)
-        }
+        const newPlayer = await Player.create(req.body.username)
+        res.status(201).send(newPlayer)
     }
     catch (err) {
         res.status(409).send({ err })
@@ -35,10 +29,9 @@ router.post('/', async (req,res) => {
 // find a player 
 router.get('/:username', async (req,res) => {
     try {
-        const players = await Player.findByUsername(req.params.username)
-        res.status(200).send(players)
-      }
-    catch (err) {
+        const player = await Player.findByUsername(req.params.username)
+        res.status(200).send(player)
+    } catch (err) {
         res.status(404).send({ err })
     }
 })
@@ -46,12 +39,11 @@ router.get('/:username', async (req,res) => {
 // update of players score 
 router.patch('/:username', async (req,res) => {
     try {
-        const players = await Player.update(req.params.username, req.body.score)
+        const player = await Player.update(req.params.username, req.body.score)
         res.status(204)
+    } catch (err) {
+        res.status(409).send({ err })
     }
-   catch (err) {
-       res.status(409).send({ err })
-   }
 })
 
 module.exports = router
