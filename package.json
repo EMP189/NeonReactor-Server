@@ -7,7 +7,7 @@
   },
   "scripts": {
     "start": "node ./api/index.js",
-    "test": "jest --setupFiles ./tests/integration/mongo-test-environment.js --watchAll --detectOpenHandles --runInBand --verbose"
+    "test": "jest --watchAll --detectOpenHandles --runInBand --verbose"
   },
   "name": "neonreactor-server",
   "description": "- N-Quiz is an online game quiz where you can play with your friends to check who is the ultimate quizzer!",

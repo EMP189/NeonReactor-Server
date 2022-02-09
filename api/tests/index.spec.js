@@ -1,75 +1,58 @@
+const { json } = require('express/lib/response');
 const request = require('supertest');
-const app = require('../index');
+const app = require('../server');
 
 describe('API Server', () => {
   const port = 5000;
   let api;
-
   beforeAll(() => {
     api = app.listen(port, () => {
       console.log(`Express is running on port ${port}`);
     })
   });
 
-  afterAll((done) => {
+  afterAll(() => {
     console.log('Gravefully stopping test server');
-    api.close(done);
+    api.close();
   })
 
-  it('responds to get / with status of 200', (done) => {
-    request(api).get('/').expect(200, done);
+  test('responds to get / with status of 200', () => {
+    return request(api).get('/').set("Accept", "application/json")
+    .expect("Content-Type", /json/)
+    .expect(200);
   });
 
-  it('GET /players retreives a leaderboard', (done) => {
-    request(api)
+  test('GET /players retreives a leaderboard', () => {
+     return request(api)
       .get('/players')
-      .expect(200)
-      .expect({'username': 'test1', 'score': 100});
+      .expect(200);
   });
 
-  it('POST /players adds a new player', (done) => {
-    request(api)
+  test('POST /players adds a new player', () => {
+    return request(api)
       .post('/players')
       .send({'username': 'test2'})
       .expect(201);
   });
 
-  it('POST /players does not add player that already exists', (done) => {
-    request(api)
+  test('POST /players does not add player that already exists', () => {
+    return request(api)
       .post('/players')
       .send({'username': 'test2'})
       .expect(409);
   });
 
-  it('GET /players/:username get player score', (done) => {
-    request(api)
-      .get('/players/test1')
+  test('GET /players/:username get player score', () => {
+    return request(api)
+      .get('/players/Test1')
       .expect(200)
-      .expect({'score': 100});
+      .expect({'username': 'Test1','score': 100});
   });
 
-  it('PATCH /players/username update player score', (done) => {
+  test('PATCH /players/username update player score', () => {
     request(api)
       .patch('/players/test2')
-      .send(70)
-      .expect(204)
-      .expect({'score': 70});
+      .send({ score: 70}).expect(204);
   });
 
-  it('POST /gameQ join room of id', (done) => {
-    request(api)
-      .post('/gameQ')
-      .expect(201);
-  });
-
-  // it('GET /gameQ return list of room ids', (done) => {
-  //   request(api).get('/players').expect(200, done);
-  // });
-
-  it('POST /gameQ/:id trigger game and send questions', (done) => {
-    request(api)
-      .post('/players/:id')
-      .send({'question': 'Hello?', 'answer': 'Goodbye'})
-      .expect(201);
-  });
 })
