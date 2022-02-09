@@ -20,4 +20,9 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/players/sfdghjkl
+GET http://neon-reactor.herokuapp.com/players
+
+###
+GET http://neon-reactor.herokuapp.com
+
+###
