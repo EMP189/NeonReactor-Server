@@ -11,6 +11,7 @@ server.listen(port, () => console.log(`Listening at http://localhost:${port}`));
 
 io.on('connection', socket => {
   socket.on('join-room', (room, username) => {
+    socket.join(room);
     socket.to(room).emit('user-join', username);
   });
 
