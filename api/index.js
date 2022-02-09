@@ -15,8 +15,8 @@ io.on('connection', socket => {
     socket.to(room).emit('user-join', username);
   });
 
-  socket.on('start-game', (room, quiz) => {
-    socket.to(room).emit('init-game', quiz)
+  socket.on('start-game', (room, diff, qnum, quiz) => {
+    socket.to(room).emit('init-game', diff, qnum, quiz)
   });
 
   socket.on('end-game', (room, username, score) => {
