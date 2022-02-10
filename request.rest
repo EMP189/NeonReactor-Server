@@ -26,3 +26,20 @@ GET http://neon-reactor.herokuapp.com/players
 GET http://neon-reactor.herokuapp.com
 
 ###
+
+POST http://neon-reactor.herokuapp.com/players
+Content-Type: application/json 
+
+{
+        "username" : "Testplayer2"
+}
+
+###
+PATCH http://neon-reactor.herokuapp.com/players/Testplayer
+Content-Type: application/json 
+
+{
+    
+        "score" : 30
+
+}
