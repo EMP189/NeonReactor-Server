@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js",
-    "test": "jest --watchAll --detectOpenHandles --runInBand --verbose"
+    "test": "jest --watchAll --detectOpenHandles --runInBand --verbose --coverage",
+    "coverage": "jest --coverage"
   },
   "name": "neonreactor-server",
   "description": "- N-Quiz is an online game quiz where you can play with your friends to check who is the ultimate quizzer!",
