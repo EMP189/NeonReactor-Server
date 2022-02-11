@@ -2,7 +2,7 @@ const app = require('./server');
 const server = require("http").createServer(app);
 const io = require("socket.io")(server, {
   cors: {
-    origin: ['http://localhost:3000']
+    origin: ['http://localhost:3000','https://neon-quiz.netlify.app/']
   }
 })
 const port = process.env.PORT || 8080;
